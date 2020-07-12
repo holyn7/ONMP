@@ -27,32 +27,32 @@ ONMP内置了以下程序的一键安装：
 (5) h5ai（优秀的文件目录）
 (6) Lychee（一个很好看，易于使用的Web相册）
 (7) Kodexplorer（可道云aka芒果云在线文档管理器）
-(8) Netdata（详细得惊人的服务器监控面板）
-(9) Typecho (流畅的轻量级开源博客程序)
-(10) Z-Blog (体积小，速度快的PHP博客程序)
-(11) DzzOffice (开源办公平台)
+(8) Typecho (流畅的轻量级开源博客程序)
+(9) Z-Blog (体积小，速度快的PHP博客程序)
+(10) DzzOffice (开源办公平台)
 ```
 
-所有的软件包均通过opkg安装，一切配置均在脚本中可见，请放心使用
+所有的软件包均通过 opkg 安装，一切配置均在脚本中可见，请放心使用
 
 ## 使用说明
 
-[如何格式化U盘](https://github.com/xzhih/ONMP/blob/master/format-partition.md)
+[wiki](https://github.com/xzhih/ONMP/wiki)
 
-本脚本使用教程发布在恩山无线论坛
-传送门：[Padavan固件一键安装onmp](http://www.right.com.cn/forum/thread-244810-1-1.html)
+[底噪博客](https://zhih.me)
 
 ## 安装教程
 
 ### 1. 安装 Entware
 
-Entware-ng是一个适用于嵌入式系统的软件包库，使用opkg包管理系统进行管理，现在在官方的源上已经有超过2000个软件包了，可以说是非常的丰富
+Entware-ng 是一个适用于嵌入式系统的软件包库，使用 opkg 包管理系统进行管理，现在在官方的源上已经有超过 2000 个软件包了，可以说是非常的丰富
 
 不同的固件，安装方式都不一样，请认准安装方式（自己是什么固件总该懂得吧😂）
 
-[在LEDE上使用Entware](https://github.com/xzhih/ONMP/blob/master/LEDE-entware.md)
+[在 LEDE 上使用 Entware](https://github.com/xzhih/ONMP/wiki/在-LEDE-上安装-Entware)
 
-[在梅林上使用Entware](https://github.com/xzhih/ONMP/blob/master/Merlin-entware.md)
+[在梅林上使用 Entware](https://github.com/xzhih/ONMP/wiki/在梅林上安装-Entware)
+
+[在 Padavan 上使用 entware](https://github.com/xzhih/ONMP/wiki/在-Padavan-上安装-Entware)
 
 ### 2. 安装onmp
 
@@ -65,13 +65,21 @@ Entware-ng是一个适用于嵌入式系统的软件包库，使用opkg包管理
 一长串的复制如果出错，可以按照以下给出的命令，一步步进行安装
 
 ```
- cd /opt && opkg install wget unzip # 进入 entware 挂载目录
+# 进入 entware 挂载目录
+ cd /opt && opkg install wget unzip 
+
 # 下载软件包
 wget --no-check-certificate -O /opt/onmp.zip https://github.com/xzhih/ONMP/archive/master.zip 
-unzip /opt/onmp.zip # 解压
+
+# 解压
+unzip /opt/onmp.zip 
 cd /opt/ONMP-master 
+
+# 设置权限
 chmod +x ./onmp.sh 
-./onmp.sh # 运行
+
+# 运行
+./onmp.sh 
 ```
 
 要是正常运行到脚本，会出现下面的情景，选1安装即可
@@ -86,6 +94,10 @@ chmod +x ./onmp.sh
 
 如果你也是和上图一样，那么恭喜你，成功的安装上了 ONMP，你可以尽情的玩耍了
 
+## 更新脚本
+
+同样是安装的那条命令，选择 2 即可更新。
+
 ## ONMP 详细使用教程
 
 **基本命令：**
@@ -96,8 +108,28 @@ chmod +x ./onmp.sh
 查看网站列表：onmp list 
 ```
 
+**主要软件包的管理命令：**
+
+```
+Nginx 管理命令
+onmp nginx start|restart|stop
+
+MySQL 管理命令
+onmp mysql start|restart|stop
+
+PHP 管理命令
+onmp php start|restart|stop
+
+Redis 管理命令
+onmp redis start|restart|stop
+```
+
 **设置数据库密码：**
 
 输入 `onmp open` 后选择3，会提示 `Enter password:` ，这个时候要输入当前数据库的密码，比如我初始设置的数据库密码是123456，回车后要是密码正确，会提示输入你要设置的新密码，回车后会提示再次输入确认。也就是，一次旧密码，两次新密码。
 
 这个位置很简单，但是很多人都说改不了密码，其实是没看提示，没输入旧密码，所以我写清楚一些。
+
+## 其他
+
+探针来自 https://github.com/WuSiYu/PHP-Probe
